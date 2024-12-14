@@ -6,23 +6,26 @@ public class Roupa {
     private String categoria;
     private double preco;
     private String tamanho;
+    private String imagem;
 
     public Roupa() {
     }
 
-    public Roupa(int id, String nome, String categoria, double preco, String tamanho) {
+    public Roupa(int id, String nome, String categoria, double preco, String tamanho, String imagem) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
         this.tamanho = tamanho;
+        this.imagem = imagem;
     }
 
-    public Roupa(String nome, String categoria, double preco, String tamanho) {
+    public Roupa(String nome, String categoria, double preco, String tamanho, String imagem) {
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
         this.tamanho = tamanho;
+        this.imagem = imagem;
     }
 
     public int getId() {
@@ -63,6 +66,14 @@ public class Roupa {
 
     public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     @Override

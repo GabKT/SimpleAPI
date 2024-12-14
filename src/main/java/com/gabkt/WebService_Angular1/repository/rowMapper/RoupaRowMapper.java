@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.gabkt.WebService_Angular1.Utils.ImageUtils;
 import com.gabkt.WebService_Angular1.model.Roupa;
 
 public class RoupaRowMapper implements RowMapper<Roupa> {
@@ -16,6 +17,9 @@ public class RoupaRowMapper implements RowMapper<Roupa> {
         roupa.setCategoria(rs.getString("categoria"));
         roupa.setPreco(rs.getDouble("preco"));
         roupa.setTamanho(rs.getString("tamanho"));
+        byte[] imgBytes = rs.getBytes("imagem");
+        String base64Image = ImageUtils.convertToBase64(imgBytes);
+        roupa.setImagem(base64Image);
         return roupa;
     }
 }
