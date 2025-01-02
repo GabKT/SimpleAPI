@@ -1,6 +1,7 @@
 package com.gabkt.WebService_Angular1.repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,13 +49,29 @@ public class RoupaDao {
                         roupa.getId() });
     }
 
-    public Roupa excluirRoupa(int id) {
-        String query = "DELETE FROM roupa WHERE id = ? RETURNING *";
-        return jdbcTemplate.queryForObject(query, new RoupaRowMapper(), id);
-    }
-
     public List<Roupa> listarTodasRoupas() {
         String query = "SELECT * FROM roupa";
         return jdbcTemplate.query(query, new RoupaRowMapper());
+    }
+
+    public List<Integer> deletarRoupas(List<Integer> listOfIds) {
+        String selectQuery = "SELECT id FROM roupa WHERE id IN (" +
+                listOfIds.stream().map(id -> "?").collect(Collectors.joining(", ")) + ")";
+        List<Integer> existingIds = jdbcTemplate.queryForList(selectQuery, Integer.class, listOfIds.toArray());
+
+        if (existingIds.isEmpty()) {
+            return List.of();
+        }
+
+        String placeholder = existingIds.stream().map(element -> "?").collect(Collectors.joining(", "));
+        String query = "DELETE FROM roupa WHERE id IN (" + placeholder + ")";
+        int rowsDeleted = jdbcTemplate.update(query, existingIds.toArray());
+
+        if (rowsDeleted == existingIds.size()) {
+            return existingIds;
+        } else {
+            throw new RuntimeException(
+                    "Erro ao deletar alguns registros, quantidade de linhas afetadas: " + rowsDeleted);
+        }
     }
 }

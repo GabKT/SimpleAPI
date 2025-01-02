@@ -25,11 +25,11 @@ public class RoupaService {
         return roupaDao.atualizarRoupa(roupa);
     }
 
-    public Roupa excluirRoupa(int id) {
-        return roupaDao.excluirRoupa(id);
-    }
-
     public List<Roupa> listarTodasRoupas() {
         return roupaDao.listarTodasRoupas();
+    }
+
+    public List<Integer> deletarRoupas(List<Integer> listOfIds) {
+        return roupaDao.deletarRoupas(listOfIds);
     }
 }

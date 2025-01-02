@@ -64,12 +64,12 @@ public class RoupaController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Roupa> excluirRoupa(@PathVariable int id) {
-        Roupa resRoupa = roupaService.excluirRoupa(id);
-        if (resRoupa != null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(resRoupa);
+    @DeleteMapping
+    public ResponseEntity<List<Integer>> deletarRoupas(@RequestBody List<Integer> listOfIds) {
+        List<Integer> idsDeletados = List.of();
+        if (listOfIds != null) {
+            idsDeletados = roupaService.deletarRoupas(listOfIds);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.OK).body(idsDeletados);
     }
 }
