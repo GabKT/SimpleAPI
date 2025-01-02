@@ -76,10 +76,12 @@ public class Roupa {
         this.imagem = imagem;
     }
 
+    
+
     @Override
     public String toString() {
-        return "Roupa [id=" + id + ", nome=" + nome + ", categoria=" + categoria + ", preco=" + preco + ", tamanho="
-                + tamanho + "]";
+        return "Roupa [nome=" + nome + ", categoria=" + categoria + ", preco=" + preco + ", tamanho=" + tamanho
+                + ", imagem=" + imagem + "]";
     }
 
     @Override
