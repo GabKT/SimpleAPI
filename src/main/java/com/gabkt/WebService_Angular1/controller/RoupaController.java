@@ -42,7 +42,7 @@ public class RoupaController {
                 .body(roupas);
     }
 
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<Roupa> inserirRoupa(@RequestBody Roupa roupa) {
         Roupa resposta = roupaService.inserirRoupa(roupa);
         if (resposta != null) {
@@ -53,7 +53,7 @@ public class RoupaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping
+    @PutMapping("/admin")
     public ResponseEntity<Roupa> atualizarRoupa(@RequestBody Roupa roupa) {
         Roupa resRoupa = roupaService.atualizarRoupa(roupa);
         if (resRoupa != null) {
@@ -64,7 +64,7 @@ public class RoupaController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/admin")
     public ResponseEntity<List<Integer>> deletarRoupas(@RequestBody List<Integer> listOfIds) {
         List<Integer> idsDeletados = List.of();
         if (listOfIds != null) {
