@@ -1,5 +1,8 @@
 package com.gabkt.WebService_Angular1.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +37,9 @@ public class AuthenticationController {
         if (auth.isAuthenticated()) {
             token = tokenService.generateToken((User) auth.getPrincipal());
         }
-        return ResponseEntity.ok(token);
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
@@ -50,7 +55,7 @@ public class AuthenticationController {
         System.out.println("Usuario cadastrado: " + user);
 
         if (user != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário registrado com sucesso.");
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao registrar usuário.");
         }

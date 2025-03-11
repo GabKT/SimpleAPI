@@ -1,6 +1,7 @@
 package com.gabkt.WebService_Angular1.security;
 
 import java.time.Instant;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("simple-api")
                     .withSubject(user.getEmail())
+                    .withClaim("roles", user.getRole().getRole())
                     .withIssuedAt(Instant.now())
                     .withExpiresAt(Instant.now().plusSeconds(3600))
                     .sign(algorithm);
